@@ -1,0 +1,109 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Jost", system-ui, sans-serif;
+  --font-sans: "Montserrat", system-ui, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 20px;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-forest: var(--forest);
+  --color-sage: var(--sage);
+  --color-ocean: var(--ocean);
+  --color-navy: var(--navy);
+  --color-charcoal: var(--charcoal);
+  --color-stone: var(--stone);
+  --color-cream: var(--cream);
+
+  --text-display: 92px;
+  --text-h2: 72px;
+  --text-h3: 48px;
+}
+
+:root {
+  /* Brand tokens (oklch approximations of brief hex) */
+  --forest: oklch(0.18 0.04 145);          /* #051302 deep forest */
+  --sage: oklch(0.42 0.02 145);            /* #50594E */
+  --ocean: oklch(0.55 0.13 245);           /* #1E73BE */
+  --navy: oklch(0.38 0.09 255);            /* #294874 */
+  --charcoal: oklch(0.24 0 0);             /* #222 */
+  --stone: oklch(0.55 0 0);                /* #54595F */
+  --cream: oklch(0.97 0.005 90);           /* warm off-white */
+
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: var(--charcoal);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--charcoal);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--forest);
+  --primary-foreground: oklch(0.98 0.005 90);
+  --secondary: oklch(0.96 0.005 90);
+  --secondary-foreground: var(--forest);
+  --muted: oklch(0.94 0.004 90);
+  --muted-foreground: var(--stone);
+  --accent: var(--ocean);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.55 0.21 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.91 0.003 90);
+  --input: oklch(0.91 0.003 90);
+  --ring: var(--ocean);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5 { font-family: var(--font-display); letter-spacing: -0.01em; }
+}
+
+@layer utilities {
+  .container-px { padding-left: clamp(1.25rem, 3.6vw, 3.25rem); padding-right: clamp(1.25rem, 3.6vw, 3.25rem); }
+  .eyebrow { font-family: var(--font-sans); font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; }
+  .text-display { font-family: var(--font-display); font-weight: 600; font-size: clamp(40px, 7vw, 92px); line-height: 1.02; letter-spacing: -0.02em; }
+  .text-h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(36px, 5.4vw, 72px); line-height: 1.05; letter-spacing: -0.015em; }
+  .text-h3 { font-family: var(--font-display); font-weight: 600; font-size: clamp(26px, 3.2vw, 44px); line-height: 1.15; }
+  .body-lg { font-size: 18px; line-height: 1.6; font-weight: 400; color: var(--stone); }
+  .max-text { max-width: 60ch; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .grain::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.06;
+    background-image: radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px);
+    background-size: 3px 3px; mix-blend-mode: overlay;
+  }
+}
