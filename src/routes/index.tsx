@@ -35,16 +35,22 @@ function Hero() {
 
   return (
     <section ref={ref} className="relative h-[100svh] overflow-hidden bg-forest">
-      <motion.div style={{ y }} className="absolute inset-0 -top-[10%] h-[120%]">
+      <motion.div 
+        style={{ y }} 
+        initial={{ scale: 1.1, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute inset-0 -top-[10%] h-[120%]"
+      >
         <img src={hero} alt="Forest-side living room" className="w-full h-full object-cover" />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-b from-forest/40 via-forest/30 to-forest/70" />
       <div className="relative z-10 h-full flex items-end pb-20 lg:pb-28">
         <div className="container-px w-full text-white">
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
             className="eyebrow text-white/80 mb-6"
           >
             Interior Design & Architecture · Est. 2010
@@ -52,7 +58,7 @@ function Hero() {
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="text-display max-w-5xl"
           >
             Designing spaces.<br /><em className="not-italic text-white/70">Defining lives.</em>
@@ -60,7 +66,7 @@ function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
             className="mt-10 flex flex-wrap gap-3"
           >
             <Link to="/portfolio" className="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-white text-forest hover:bg-cream transition-colors">
@@ -72,9 +78,19 @@ function Hero() {
           </motion.div>
         </div>
       </div>
-      <div className="absolute bottom-6 right-6 lg:right-12 text-white/60 text-xs tracking-widest uppercase rotate-90 origin-bottom-right hidden lg:block">
-        Scroll
-      </div>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 1 }}
+        className="absolute bottom-6 right-6 lg:right-12 text-white/60 text-xs tracking-widest uppercase rotate-90 origin-bottom-right hidden lg:block"
+      >
+        <motion.div
+          animate={{ x: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        >
+          Scroll
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
@@ -258,9 +274,15 @@ function Journal() {
 }
 
 function FinalCTA() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+
   return (
-    <section className="relative overflow-hidden">
-      <img src={studio} alt="Inside the studio" className="absolute inset-0 w-full h-full object-cover" />
+    <section ref={ref} className="relative overflow-hidden">
+      <motion.div style={{ scale }} className="absolute inset-0 w-full h-full">
+        <img src={studio} alt="Inside the studio" className="w-full h-full object-cover" />
+      </motion.div>
       <div className="absolute inset-0 bg-forest/80" />
       <div className="relative container-px py-32 lg:py-48 text-white text-center">
         <Reveal>
